@@ -20,7 +20,7 @@ export default function Beverage({
   return (
     <>
       <div
-        className={`bg-${color}-500 text-white py-2 rounded hover:brightness-90 text-center
+        className={`${color} text-white py-2 rounded hover:brightness-90 text-center
         ${disabled ? 'opacity-40 cursor-not-allowed' : 'hover:cursor-pointer'}`}
         onClick={onClick}
         onMouseEnter={onMouseEnter}

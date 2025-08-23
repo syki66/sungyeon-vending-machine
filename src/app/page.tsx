@@ -107,12 +107,12 @@ export default function Home() {
             자판기
           </h1>
           <Display text={displayMainText} subText={displaySubText} />
-          <div className="grid grid-cols-3 gap-4 my-6">
+          <div className="grid grid-cols-3 gap-4 my-6 bg-red-">
             <Beverage
               onClick={() => handleBalanceChange(-PRICE_LIST.cola)}
               name="콜라"
               price={PRICE_LIST.cola}
-              color="red"
+              color="bg-red-600"
               disabled={
                 paymentMethod === 'cash' && machineBalance < PRICE_LIST.cola
               }
@@ -121,7 +121,7 @@ export default function Home() {
               onClick={() => handleBalanceChange(-PRICE_LIST.water)}
               name="물"
               price={PRICE_LIST.water}
-              color="blue"
+              color="bg-blue-600"
               disabled={
                 paymentMethod === 'cash' && machineBalance < PRICE_LIST.water
               }
@@ -130,7 +130,7 @@ export default function Home() {
               onClick={() => handleBalanceChange(-PRICE_LIST.coffee)}
               name="커피"
               price={PRICE_LIST.coffee}
-              color="yellow"
+              color="bg-yellow-800"
               disabled={
                 paymentMethod === 'cash' && machineBalance < PRICE_LIST.coffee
               }
@@ -154,13 +154,13 @@ export default function Home() {
             {dispensedDrinks.map((drink, index) => (
               <span key={index} className="text-black text-center">
                 {drink === '콜라' && (
-                  <BottleWine color="red" className="inline mb-1" />
+                  <BottleWine color="#d42422" className="inline mb-1" />
                 )}
                 {drink === '물' && (
-                  <GlassWater color="blue" className="inline mb-1" />
+                  <GlassWater color="#2c5cf2" className="inline mb-1" />
                 )}
                 {drink === '커피' && (
-                  <Coffee color="brown" className="inline mb-1" />
+                  <Coffee color="#804E13" className="inline mb-1" />
                 )}
               </span>
             ))}
@@ -178,37 +178,37 @@ export default function Home() {
             <Money
               onClick={() => handleBalanceChange(1000)}
               type={1000}
-              color="blue"
+              color="bg-blue-400"
               disabled={walletBalance < 1000}
             />
             <Money
               onClick={() => handleBalanceChange(5000)}
               type={5000}
-              color="yellow"
+              color="bg-yellow-400"
               disabled={walletBalance < 5000}
             />
             <Money
               onClick={() => handleBalanceChange(10000)}
               type={10000}
-              color="green"
+              color="bg-green-400"
               disabled={walletBalance < 10000}
             />
             <Money
               onClick={() => handleBalanceChange(100)}
               type={100}
-              color="gray"
+              color="bg-gray-400"
               disabled={walletBalance < 100}
             />
             <Money
               onClick={() => handleBalanceChange(500)}
               type={500}
-              color="gray"
+              color="bg-gray-400"
               disabled={walletBalance < 500}
             />
             <Money
               onClick={() => handleCardClick()}
               type={'card'}
-              color="fuchsia"
+              color="bg-fuchsia-500"
             />
           </div>
         </div>
