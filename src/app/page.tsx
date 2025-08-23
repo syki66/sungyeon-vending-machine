@@ -5,6 +5,7 @@ import Display from '@/components/display';
 import { Money } from '@/components/money';
 import PRICE_LIST from '@/constant/price';
 import { useEffect, useState } from 'react';
+import { BottleWine, GlassWater, Coffee } from 'lucide-react';
 
 export default function Home() {
   const [machineBalance, setMachineBalance] = useState<number>(0); // 자판기 잔액
@@ -15,6 +16,7 @@ export default function Home() {
     useState<string>('현금 또는 카드를 투입해주세요.'); // 디스플레이에 표시되는 메인 문구
   const [displaySubText, setDisplaySubText] =
     useState<string>('현재 잔액: 0원'); // 디스플레이의 오른쪽 하단에 표시되는 잔액 문구
+  const [dispensedDrinks, setDispensedDrinks] = useState<string[]>([]); // 뽑은 음료 목록
 
   // 잔액 변경 함수
   const handleBalanceChange = (amount: number) => {
@@ -26,15 +28,18 @@ export default function Home() {
       // 음료 구매일 경우
       let usedText = '';
       if (amount === -PRICE_LIST.cola) {
-        usedText = `콜라를 뽑았습니다.`;
+        usedText = `콜라를`;
       } else if (amount === -PRICE_LIST.water) {
-        usedText = `물을 뽑았습니다.`;
+        usedText = `물을`;
       } else if (amount === -PRICE_LIST.coffee) {
-        usedText = `커피를 뽑았습니다.`;
+        usedText = `커피를`;
       }
+
+      setDispensedDrinks((prev) => [...prev, usedText.slice(0, -1)]); // 뽑은 음료 목록에 추가
+
       // 카드 결제 중 이거나 버튼 비활성화가 아닌 경우에만 문구 출력
       if (paymentMethod === 'card' || machineBalance + amount >= 0) {
-        setDisplayMainText(`${usedText}`);
+        setDisplayMainText(`${usedText} 뽑았습니다.`);
       } else {
         // 비활성화된 경우 자판기 잔액 부족 문구 출력
         setDisplayMainText('잔액이 부족합니다.');
@@ -139,6 +144,18 @@ export default function Home() {
             >
               잔돈 반환
             </button>
+          </div>
+          <h2 className="text-xl font-bold mb-2 text-center text-black">
+            음료 출구
+          </h2>
+          <div className="">
+            {dispensedDrinks.map((drink, index) => (
+              <span key={index} className="text-black text-center">
+                {drink === '콜라' && <BottleWine className="inline mb-1" />}
+                {drink === '물' && <GlassWater className="inline mb-1" />}
+                {drink === '커피' && <Coffee className="inline mb-1" />}
+              </span>
+            ))}
           </div>
         </div>
 
