@@ -101,13 +101,13 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        <div className="bg-white rounded-lg shadow-lg p-8 w-80">
-          <h1 className="text-2xl font-bold mb-4 text-center text-black">
+      <div className="flex flex-col items-center justify-start min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 select-none">
+        <div className="bg-white rounded-lg shadow-lg m-10 p-8 w-80 border border-gray-200">
+          <h1 className="text-2xl font-bold mb-4 text-center text-black text-gray-800">
             자판기
           </h1>
           <Display text={displayMainText} subText={displaySubText} />
-          <div className="grid grid-cols-3 gap-4 my-6 bg-red-">
+          <div className="grid grid-cols-3 gap-4 my-6">
             <Beverage
               onClick={() => handleBalanceChange(-PRICE_LIST.cola)}
               name="콜라"
@@ -138,7 +138,7 @@ export default function Home() {
           </div>
           <div className="flex justify-center mb-6">
             <button
-              className="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 font-semibold"
+              className="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 font-semibold cursor-pointer"
               onClick={handleReturnChange}
             >
               잔돈 반환
@@ -150,7 +150,7 @@ export default function Home() {
           <h2 className="text-xl font-bold mb-2 text-center text-black">
             음료 출구
           </h2>
-          <div className="overflow-scroll max-h-60">
+          <div className="overflow-auto max-h-44 bg-gray-50 p-2 rounded">
             {dispensedDrinks.map((drink, index) => (
               <span key={index} className="text-black text-center">
                 {drink === '콜라' && (
@@ -167,11 +167,11 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="bg-purple-100 rounded-lg shadow-lg p-8 w-80 fixed bottom-10 right-10">
-          <h1 className="text-2xl font-bold mb-4 text-center text-black">
+        <div className="bg-orange-50 border border-gray-200 rounded-lg shadow-lg p-8 w-80 fixed bottom-10 right-10">
+          <h1 className="text-2xl font-bold mb-4 text-center text-gray-800">
             지갑
           </h1>
-          <h2 className="text-black text-right mb-4">
+          <h2 className="text-lg font-semibold text-gray-800 bg-gray-100 p-2 rounded text-right mb-4">
             잔액: {walletBalance.toLocaleString()}원
           </h2>
           <div className="grid grid-cols-3 gap-4 mb-6">
