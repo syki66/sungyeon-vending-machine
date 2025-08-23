@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react';
 export default function Home() {
   const [machineBalance, setMachineBalance] = useState<number>(0); // 자판기 잔액
   const [walletBalance, setWalletBalance] = useState<number>(50000); // 지갑 잔액
+  const [paymentMethod, setPaymentMethod] = useState<'cash' | 'card'>('cash'); // 결제 수단 (현금 또는 카드)
+  const [cardSpent, setCardSpent] = useState<number>(0); // 카드로 결제한 금액
   const [displayMainText, setDisplayMainText] =
     useState<string>('현금 또는 카드를 투입해주세요.'); // 디스플레이에 표시되는 메인 문구
   const [displaySubText, setDisplaySubText] =
@@ -30,8 +32,8 @@ export default function Home() {
       } else if (amount === -PRICE_LIST.coffee) {
         usedText = `커피를 뽑았습니다.`;
       }
-      // 버튼 비활성화가 아닌 경우에만 문구 출력
-      if (machineBalance + amount >= 0 && usedText) {
+      // 카드 결제 중 이거나 버튼 비활성화가 아닌 경우에만 문구 출력
+      if (paymentMethod === 'card' || machineBalance + amount >= 0) {
         setDisplayMainText(`${usedText}`);
       } else {
         // 비활성화된 경우 자판기 잔액 부족 문구 출력
@@ -39,10 +41,53 @@ export default function Home() {
       }
     }
 
-    // 잔액 업데이트 (잔액이 음수가 되지 않도록 처리)
+    // 카드 결제 시 금액 추적
+    if (paymentMethod === 'card' && amount < 0) {
+      setCardSpent((prev) => prev + amount); // 카드로 결제한 금액 업데이트
+      setDisplaySubText(
+        `카드 사용 금액: ${Math.abs(cardSpent + amount).toLocaleString()}원`
+      );
+      return;
+    }
+
+    // 현금 결제 시
+    setPaymentMethod('cash'); // 결제 수단을 현금으로 설정
+    setCardSpent(0); // 카드 사용 금액 초기화
     setMachineBalance((prev) => (prev + amount < 0 ? prev : prev + amount)); // 자판기 잔액 업데이트
     amount > 0 &&
       setWalletBalance((prev) => (prev - amount < 0 ? prev : prev - amount)); // 지갑 잔액 업데이트 (금액 투입 시에만)
+  };
+
+  // 카드 클릭 시
+  const handleCardClick = () => {
+    // 기계에 잔액이 남아있다면 반환 후 카드 사용 가능
+    if (paymentMethod === 'cash' && machineBalance > 0) {
+      setDisplayMainText('잔액 반환 후 카드를 사용해주세요.');
+      return;
+    }
+
+    setPaymentMethod('card');
+    setDisplayMainText('카드가 투입되었습니다.');
+    setDisplaySubText(
+      `카드 사용 금액: ${Math.abs(cardSpent).toLocaleString()}원`
+    );
+  };
+
+  // 잔돈 반환 레버 클릭 시
+  const handleReturnChange = () => {
+    if (machineBalance > 0) {
+      setDisplayMainText(
+        `${machineBalance.toLocaleString()}원이 반환되었습니다.`
+      );
+      setWalletBalance((prev) => prev + machineBalance); // 지갑 잔액 업데이트
+      setMachineBalance(0); // 자판기 잔액 0으로 초기화
+    } else {
+      setDisplayMainText(
+        paymentMethod === 'cash'
+          ? '반환할 잔액이 없습니다.'
+          : '카드 사용 중 입니다.'
+      );
+    }
   };
 
   // 자판기 잔액이 변경될 때마다 디스플레이 서브 텍스트 업데이트
@@ -64,23 +109,36 @@ export default function Home() {
               name="콜라"
               price={PRICE_LIST.cola}
               color="red"
-              disabled={machineBalance < PRICE_LIST.cola}
+              disabled={
+                paymentMethod === 'cash' && machineBalance < PRICE_LIST.cola
+              }
             />
             <Beverage
               onClick={() => handleBalanceChange(-PRICE_LIST.water)}
               name="물"
               price={PRICE_LIST.water}
               color="blue"
-              disabled={machineBalance < PRICE_LIST.water}
+              disabled={
+                paymentMethod === 'cash' && machineBalance < PRICE_LIST.water
+              }
             />
             <Beverage
               onClick={() => handleBalanceChange(-PRICE_LIST.coffee)}
               name="커피"
               price={PRICE_LIST.coffee}
               color="yellow"
-              disabled={machineBalance < PRICE_LIST.coffee}
+              disabled={
+                paymentMethod === 'cash' && machineBalance < PRICE_LIST.coffee
+              }
             />
           </div>
+          <div className="flex justify-center mb-4">
+            <button
+              className="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 font-semibold"
+              onClick={handleReturnChange}
+            >
+              잔돈 반환
+            </button>
           </div>
         </div>
 
@@ -122,7 +180,11 @@ export default function Home() {
               color="gray"
               disabled={walletBalance < 500}
             />
-            <Money type={'card'} color="fuchsia" />
+            <Money
+              onClick={() => handleCardClick()}
+              type={'card'}
+              color="fuchsia"
+            />
           </div>
         </div>
       </div>
