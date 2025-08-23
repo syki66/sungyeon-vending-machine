@@ -107,7 +107,7 @@ export default function Home() {
             자판기
           </h1>
           <Display text={displayMainText} subText={displaySubText} />
-          <div className="grid grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-3 gap-4 my-6">
             <Beverage
               onClick={() => handleBalanceChange(-PRICE_LIST.cola)}
               name="콜라"
@@ -136,7 +136,7 @@ export default function Home() {
               }
             />
           </div>
-          <div className="flex justify-center mb-4">
+          <div className="flex justify-center mb-6">
             <button
               className="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 font-semibold"
               onClick={handleReturnChange}
@@ -144,21 +144,30 @@ export default function Home() {
               잔돈 반환
             </button>
           </div>
+
+          <hr className="mb-5" />
+
           <h2 className="text-xl font-bold mb-2 text-center text-black">
             음료 출구
           </h2>
-          <div className="">
+          <div>
             {dispensedDrinks.map((drink, index) => (
               <span key={index} className="text-black text-center">
-                {drink === '콜라' && <BottleWine className="inline mb-1" />}
-                {drink === '물' && <GlassWater className="inline mb-1" />}
-                {drink === '커피' && <Coffee className="inline mb-1" />}
+                {drink === '콜라' && (
+                  <BottleWine color="red" className="inline mb-1" />
+                )}
+                {drink === '물' && (
+                  <GlassWater color="blue" className="inline mb-1" />
+                )}
+                {drink === '커피' && (
+                  <Coffee color="brown" className="inline mb-1" />
+                )}
               </span>
             ))}
           </div>
         </div>
 
-        <div className="bg-purple-100 rounded-lg shadow-lg p-8 w-80">
+        <div className="bg-purple-100 rounded-lg shadow-lg p-8 w-80 fixed bottom-10 right-10">
           <h1 className="text-2xl font-bold mb-4 text-center text-black">
             지갑
           </h1>
