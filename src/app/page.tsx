@@ -1,3 +1,5 @@
+import { Money } from '@/components/money';
+
 export default function Home() {
   return (
     <>
@@ -7,24 +9,12 @@ export default function Home() {
             지갑
           </h1>
           <div className="grid grid-cols-3 gap-4 mb-6">
-            <button className="bg-blue-400 text-white py-2 rounded hover:brightness-90">
-              1000원
-            </button>
-            <button className="bg-yellow-400 text-white py-2 rounded hover:brightness-90">
-              5000원
-            </button>
-            <button className="bg-green-500 text-white py-2 rounded hover:brightness-90">
-              10000원
-            </button>
-            <button className="bg-gray-400 text-white py-2 rounded-full w-16 h-16 flex items-center justify-center hover:brightness-90">
-              100원
-            </button>
-            <button className="bg-gray-500 text-white py-2 rounded-full w-16 h-16 flex items-center justify-center hover:brightness-90">
-              500원
-            </button>
-            <button className="bg-fuchsia-500 text-white py-2 rounded hover:brightness-90">
-              카드
-            </button>
+            <Money type={1000} color="blue" />
+            <Money type={5000} color="yellow" />
+            <Money type={10000} color="red" />
+            <Money type={100} color="gray" />
+            <Money type={500} color="gray" />
+            <Money type={'card'} color="fuchsia" />
           </div>
         </div>
       </div>
