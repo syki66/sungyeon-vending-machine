@@ -3,6 +3,7 @@
 import Beverage from '@/components/beverage';
 import Display from '@/components/display';
 import { Money } from '@/components/money';
+import PRICE_LIST from '@/constant/price';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -30,25 +31,25 @@ export default function Home() {
           <Display text={displayText} />
           <div className="grid grid-cols-3 gap-4 mb-6">
             <Beverage
-              onClick={() => handleBalanceChange(-1100)}
+              onClick={() => handleBalanceChange(-PRICE_LIST.cola)}
               name="콜라"
-              price={1100}
+              price={PRICE_LIST.cola}
               color="red"
-              disabled={balance < 1100}
+              disabled={balance < PRICE_LIST.cola}
             />
             <Beverage
-              onClick={() => handleBalanceChange(-600)}
+              onClick={() => handleBalanceChange(-PRICE_LIST.water)}
               name="물"
-              price={600}
+              price={PRICE_LIST.water}
               color="blue"
-              disabled={balance < 600}
+              disabled={balance < PRICE_LIST.water}
             />
             <Beverage
-              onClick={() => handleBalanceChange(-700)}
+              onClick={() => handleBalanceChange(-PRICE_LIST.coffee)}
               name="커피"
-              price={700}
+              price={PRICE_LIST.coffee}
               color="yellow"
-              disabled={balance < 700}
+              disabled={balance < PRICE_LIST.coffee}
             />
           </div>
           </div>
