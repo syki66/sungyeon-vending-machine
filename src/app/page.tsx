@@ -38,7 +38,7 @@ export default function Home() {
       // 카드 결제 중 이거나 버튼 비활성화가 아닌 경우에만 문구 출력
       if (paymentMethod === 'card' || machineBalance + amount >= 0) {
         setDisplayMainText(`${usedText} 뽑았습니다.`);
-        setDispensedDrinks((prev) => [...prev, usedText.slice(0, -1)]); // 뽑은 음료 목록에 추가
+        setDispensedDrinks((prev) => [usedText.slice(0, -1), ...prev]); // 뽑은 음료 목록에 추가
       } else {
         // 비활성화된 경우 자판기 잔액 부족 문구 출력
         setDisplayMainText('잔액이 부족합니다.');
@@ -150,7 +150,7 @@ export default function Home() {
           <h2 className="text-xl font-bold mb-2 text-center text-black">
             음료 출구
           </h2>
-          <div>
+          <div className="overflow-scroll max-h-60">
             {dispensedDrinks.map((drink, index) => (
               <span key={index} className="text-black text-center">
                 {drink === '콜라' && (
