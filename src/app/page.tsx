@@ -1,4 +1,5 @@
 import Beverage from '@/components/beverage';
+import Display from '@/components/display';
 import { Money } from '@/components/money';
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
           <h1 className="text-2xl font-bold mb-4 text-center text-black">
             자판기
           </h1>
+          <Display text={'현금 또는 카드를 투입해주세요.'} />
           <div className="grid grid-cols-3 gap-4 mb-6">
             <Beverage name="콜라" price={1100} color="red" disabled={true} />
             <Beverage name="물" price={600} color="blue" disabled={false} />
