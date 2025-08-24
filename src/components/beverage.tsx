@@ -27,7 +27,7 @@ export default function Beverage({
         onMouseLeave={onMouseLeave}
       >
         {name}
-        <span className="block text-xs mt-1">₩{price}</span>
+        <span className="block text-xs mt-1">₩{price.toLocaleString()}</span>
       </div>
     </>
   );

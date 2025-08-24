@@ -101,9 +101,55 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-start min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 select-none">
-        <div className="bg-white rounded-lg shadow-lg m-10 p-8 w-80 border border-gray-200">
-          <h1 className="text-2xl font-bold mb-4 text-center text-black text-gray-800">
+      <div className="flex flex-col items-center justify-start min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 p-5 select-none">
+        <div className="bg-orange-50 border border-gray-200 rounded-lg shadow-lg p-5 md:p-8 w-full md:w-80 md:fixed bottom-10 right-10">
+          <h1 className="text-2xl font-bold mb-4 text-center text-gray-800">
+            지갑
+          </h1>
+          <h2 className="text-lg font-semibold text-gray-800 bg-gray-100 p-2 rounded text-right mb-4">
+            잔액: {walletBalance.toLocaleString()}원
+          </h2>
+          <div className="grid grid-cols-3 gap-4 place-items-center">
+            <Money
+              onClick={() => handleBalanceChange(1000)}
+              type={1000}
+              color="bg-blue-400"
+              disabled={walletBalance < 1000}
+            />
+            <Money
+              onClick={() => handleBalanceChange(5000)}
+              type={5000}
+              color="bg-yellow-400"
+              disabled={walletBalance < 5000}
+            />
+            <Money
+              onClick={() => handleBalanceChange(10000)}
+              type={10000}
+              color="bg-green-400"
+              disabled={walletBalance < 10000}
+            />
+            <Money
+              onClick={() => handleBalanceChange(100)}
+              type={100}
+              color="bg-gray-400"
+              disabled={walletBalance < 100}
+            />
+            <Money
+              onClick={() => handleBalanceChange(500)}
+              type={500}
+              color="bg-stone-400"
+              disabled={walletBalance < 500}
+            />
+            <Money
+              onClick={() => handleCardClick()}
+              type={'card'}
+              color="bg-fuchsia-500"
+            />
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-lg m-5 md:m-10 p-5 md:p-8 w-full md:w-80 border border-gray-200">
+          <h1 className="text-2xl font-bold mb-4 text-center text-black">
             자판기
           </h1>
           <Display text={displayMainText} subText={displaySubText} />
@@ -164,52 +210,6 @@ export default function Home() {
                 )}
               </span>
             ))}
-          </div>
-        </div>
-
-        <div className="bg-orange-50 border border-gray-200 rounded-lg shadow-lg p-8 w-80 fixed bottom-10 right-10">
-          <h1 className="text-2xl font-bold mb-4 text-center text-gray-800">
-            지갑
-          </h1>
-          <h2 className="text-lg font-semibold text-gray-800 bg-gray-100 p-2 rounded text-right mb-4">
-            잔액: {walletBalance.toLocaleString()}원
-          </h2>
-          <div className="grid grid-cols-3 gap-4 mb-6">
-            <Money
-              onClick={() => handleBalanceChange(1000)}
-              type={1000}
-              color="bg-blue-400"
-              disabled={walletBalance < 1000}
-            />
-            <Money
-              onClick={() => handleBalanceChange(5000)}
-              type={5000}
-              color="bg-yellow-400"
-              disabled={walletBalance < 5000}
-            />
-            <Money
-              onClick={() => handleBalanceChange(10000)}
-              type={10000}
-              color="bg-green-400"
-              disabled={walletBalance < 10000}
-            />
-            <Money
-              onClick={() => handleBalanceChange(100)}
-              type={100}
-              color="bg-gray-400"
-              disabled={walletBalance < 100}
-            />
-            <Money
-              onClick={() => handleBalanceChange(500)}
-              type={500}
-              color="bg-gray-400"
-              disabled={walletBalance < 500}
-            />
-            <Money
-              onClick={() => handleCardClick()}
-              type={'card'}
-              color="bg-fuchsia-500"
-            />
           </div>
         </div>
       </div>
