@@ -102,13 +102,18 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col items-center justify-start min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 p-5 select-none">
+        {/* 지갑 컴포넌트 */}
         <div className="bg-orange-50 border border-gray-200 rounded-lg shadow-lg p-5 md:p-8 w-full md:w-80 md:fixed bottom-10 right-10">
           <h1 className="text-2xl font-bold mb-4 text-center text-gray-800">
             지갑
           </h1>
+
+          {/* 지갑 잔액 표시 */}
           <h2 className="text-lg font-semibold text-gray-800 bg-gray-100 p-2 rounded text-right mb-4">
             잔액: {walletBalance.toLocaleString()}원
           </h2>
+
+          {/* 현금 및 카드 버튼 */}
           <div className="grid grid-cols-3 gap-4 place-items-center">
             <Money
               onClick={() => handleBalanceChange(1000)}
@@ -148,11 +153,16 @@ export default function Home() {
           </div>
         </div>
 
+        {/* 자판기 컴포넌트 */}
         <div className="bg-white rounded-lg shadow-lg m-5 md:m-10 p-5 md:p-8 w-full md:w-80 border border-gray-200">
           <h1 className="text-2xl font-bold mb-4 text-center text-black">
             자판기
           </h1>
+
+          {/* 디스플레이 컴포넌트 */}
           <Display text={displayMainText} subText={displaySubText} />
+
+          {/* 음료 선택 버튼 */}
           <div className="grid grid-cols-3 gap-4 my-6">
             <Beverage
               onClick={() => handleBalanceChange(-PRICE_LIST.cola)}
@@ -185,6 +195,8 @@ export default function Home() {
               }
             />
           </div>
+
+          {/* 잔돈 반환 레버 */}
           <div className="flex justify-center mb-6">
             <button
               className="bg-gray-300 text-black py-2 px-4 rounded hover:bg-gray-400 font-semibold cursor-pointer"
@@ -196,6 +208,7 @@ export default function Home() {
 
           <hr className="mb-5" />
 
+          {/* 음료 출구 */}
           <h2 className="text-xl font-bold mb-2 text-center text-black">
             음료 출구
           </h2>

@@ -14,8 +14,6 @@ export default function Beverage({
   color,
   disabled,
   onClick,
-  onMouseEnter,
-  onMouseLeave,
 }: BeverageProps) {
   return (
     <>
