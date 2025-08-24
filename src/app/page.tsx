@@ -157,6 +157,7 @@ export default function Home() {
             <Beverage
               onClick={() => handleBalanceChange(-PRICE_LIST.cola)}
               name="콜라"
+              icon={<BottleWine color="#FFFFFF" className="inline" />}
               price={PRICE_LIST.cola}
               color="bg-red-600"
               disabled={
@@ -166,6 +167,7 @@ export default function Home() {
             <Beverage
               onClick={() => handleBalanceChange(-PRICE_LIST.water)}
               name="물"
+              icon={<GlassWater color="#FFFFFF" className="inline" />}
               price={PRICE_LIST.water}
               color="bg-blue-600"
               disabled={
@@ -175,6 +177,7 @@ export default function Home() {
             <Beverage
               onClick={() => handleBalanceChange(-PRICE_LIST.coffee)}
               name="커피"
+              icon={<Coffee color="#FFFFFF" className="inline" />}
               price={PRICE_LIST.coffee}
               color="bg-yellow-800"
               disabled={
