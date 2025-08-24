@@ -1,12 +1,10 @@
 # Vending Machine
 
-Next.js와 TypeScript로 만든 간단한 자판기 웹애플리케이션입니다. [(Live Demo)](https://vending-machine-sample-page.netlify.app)
+Next.js, TypeScript, Tailwind CSS를 활용해 만든 간단한 자판기 웹애플리케이션입니다. [(Live Demo)](https://vending-machine-sample-page.netlify.app)
 
-## Screenshots/Live Demo
-
-| img1  | img2  |
+| PC    | 모바일  |
 | :---: | :---: |
-| ![]() | ![]() |
+| ![pc](https://github.com/user-attachments/assets/3aee3cc5-8413-4acb-9079-0d8c2d1a59e4) | ![mobile](https://github.com/user-attachments/assets/afed3b11-6860-43e4-a6bb-1dd0d18d1748) |
 
 ## 사용된 라이브러리 및 버전
 
